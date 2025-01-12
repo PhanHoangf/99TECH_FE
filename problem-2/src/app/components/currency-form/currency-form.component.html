@@ -1,0 +1,37 @@
+<div [formGroup]="currencyForm" class="form-container">
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">Tokens</label>
+        <select formControlName="selectedCurrency"
+            [ngClass]="{'is-invalid' : selectedCurrencyFormControl?.dirty && selectedCurrencyFormControl?.invalid}"
+            class="form-select" aria-label="Default select example">
+            @for (item of tokens; track $index) {
+            <option [value]="item.currency"> {{item.currency}}
+            </option>
+            }
+        </select>
+        <label class="input-group-text" for="inputGroupSelect01">
+            <img [src]="currencyService.getCurrencyIcon(selectedCurrencyFormControl?.value)" alt="">
+        </label>
+    </div>
+
+    @if (isConverted) {
+    <div class="mb-3">
+        <span class="col-4 fw-bold">Total received amount: </span>
+        <span>{{convertedAmount}}</span>
+    </div>
+
+    <div class="mb-3">
+        <span class="col-4 fw-bold">Total received price: </span>
+        <span>{{totalPrice}}</span>
+    </div>
+    } @else {
+    <input formControlName="amount" [type]="'number'" class="form-control mb-3"
+        [ngClass]="{'is-invalid' : amountFormControl?.dirty && amountFormControl?.invalid}" type="text"
+        placeholder="Amount" aria-label="default input example">
+
+    <div class="mb-3">
+        <span class="col-4 fw-bold">Price: </span>
+        <span>{{selectedPrice}}</span>
+    </div>
+    }
+</div>

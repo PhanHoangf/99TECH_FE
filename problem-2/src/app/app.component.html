@@ -1,0 +1,36 @@
+<div class="main-container pt-3">
+  <div class="send-container me-5">
+    <div style="height: 300px;" class="card">
+      <div class="card-header fw-bold">
+        {{ 'Money Transfer' | uppercase }}
+      </div>
+      <div class="card-body">
+        <app-currency-form [tokens]="tokens" (onAmountChange)="handleTransferAmountChange($event)"
+          (onSelectedCurrencyChange)="handleTransferCurrencyChange($event)"></app-currency-form>
+      </div>
+    </div>
+  </div>
+  @if (!isLoading) {
+  <div class="swap-icon">
+    <img
+      src="https://raw.githubusercontent.com/ant-design/ant-design-icons/6f00108512f880149afe0904fb4a1cf776612aa0/packages/icons-svg/svg/outlined/swap.svg"
+      alt="">
+  </div>
+  } @else {
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  }
+  <div class="received-container ms-5">
+    <div style="height: 300px;" class="card">
+      <div class="card-header fw-bold">
+        {{ 'money received' | uppercase }}
+      </div>
+      <div class="card-body">
+        <app-currency-form [tokens]="tokens" [convertedAmount]="receivedAmount" [totalPrice]="receivedPrice"
+          (onSelectedCurrencyChange)="handleReceivedCurrencyChange($event)" [isConverted]="true"></app-currency-form>
+      </div>
+    </div>
+  </div>
+  <div class="swap-btn-container"></div>
+</div>
